@@ -1,0 +1,34 @@
+﻿﻿@model GES_APP.ViewModels.EnrollmentViewModel
+
+@{ ViewBag.Title = "Create"; }
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Assign Student</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Enrollment.Student, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(x => x.Enrollment.StudentID, new SelectList(Model.Students, "Id", "UserName"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Enrollment.StudentID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Enrollment.Course, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(x => x.Enrollment.CourseId, new SelectList(Model.Courses, "Id", "Name"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Enrollment.CourseId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Assign" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>}

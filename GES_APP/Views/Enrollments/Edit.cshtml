@@ -1,0 +1,29 @@
+﻿@model GES_APP.ViewModels.EnrollmentViewModel
+@{ ViewBag.Title = "Edit"; }
+
+<h2>Edit</h2>
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+@using (Html.BeginForm("Edit", "Enrollments", FormMethod.Post))
+{
+@Html.HiddenFor(u => u.Enrollment.Id)
+                <div class="form-horizontal">
+                    <hr />
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.Enrollment.Course.Name)
+                        @Html.DropDownListFor(p => p.Enrollment.CourseId,
+                                   new SelectList(Model.Courses, "Id", "Name"),
+                                   "Select Course Name",
+                                   new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

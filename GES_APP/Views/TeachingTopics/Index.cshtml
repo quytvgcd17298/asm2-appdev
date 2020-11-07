@@ -1,0 +1,63 @@
+﻿﻿@model IEnumerable<GES_APP.Models.TeachingTopic>
+
+@{ ViewBag.Title = "TeachingTopic"; }
+
+<h2>Manage Teaching Topic</h2>
+@if (User.IsInRole("TrainingStaff"))
+{
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Lecturer)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Topic)
+                        </th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lecturer.UserName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Topic.Name)
+                    </td>
+
+                    <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
+                    <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</td>
+
+                </tr>
+}
+
+                </table>
+}
+@if (User.IsInRole("Lecturer"))
+{<table class="table">
+     <tr>
+         <th>
+             @Html.DisplayNameFor(item => item.Topic)
+         </th>
+
+         <th></th>
+     </tr>
+        @foreach (var item in Model)
+        {
+ <tr>
+     <td>
+         @Html.DisplayFor(modelItem => item.Topic.Name)
+     </td>
+     
+ </tr>
+}
+    </table>}
+@Html.ActionLink("Back to home", "Index", "Home")
